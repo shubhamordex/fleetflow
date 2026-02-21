@@ -55,7 +55,13 @@ function SidebarItem({ label, path, icon: Icon }) {
   return (
     <NavLink
       to={path}
-      className="flex items-center gap-3 text-gray-700 cursor-pointer hover:text-black hover:translate-x-1 transition"
+      className={({ isActive }) =>
+        `flex items-center gap-3 cursor-pointer hover:translate-x-1 transition ${
+          isActive
+            ? "text-black font-bold"
+            : "text-gray-700 hover:text-black"
+        }`
+      }
     >
       {Icon && <Icon size={20} strokeWidth={1.5} />}
       {label}
