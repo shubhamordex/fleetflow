@@ -81,24 +81,13 @@ export default function VehicleRegistry() {
       <div className="w-full bg-white rounded-2xl shadow-2xl border border-slate-200 overflow-hidden">
 
         {/* Toolbar */}
-        <div className="flex flex-col sm:flex-row items-center gap-4 px-8 py-6 border-b border-slate-100 bg-slate-50">
+        <div >
           <Search
             value={search}
             onChange={e => setSearch(e.target.value)}
             placeholder="Search by plate, type, model, status..."
+              buttonLabel="New Vehicle"
           />
-          <div className="flex gap-3 w-full sm:w-auto">
-            {["Group by", "Filter", "Sort by"].map(label => (
-              <button key={label} className="text-xs px-4 py-2.5 rounded-lg border border-slate-200 bg-white text-slate-600 hover:bg-slate-100 transition font-medium flex-1 sm:flex-none">
-                {label}
-              </button>
-            ))}
-            <button
-              onClick={() => setShowModal(true)}
-              className="text-xs px-5 py-2.5 rounded-lg bg-teal-500 text-white font-semibold hover:bg-teal-600 active:scale-95 transition shadow-sm flex items-center gap-2 flex-1 sm:flex-none justify-center sm:justify-start">
-              <span className="text-base leading-none">+</span> New Vehicle
-            </button>
-          </div>
         </div>
 
         {/* Table */}

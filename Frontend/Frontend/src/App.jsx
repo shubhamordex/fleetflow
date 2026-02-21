@@ -13,6 +13,7 @@ import Maintenance from "./pages/Maintenance";
 import TripandExpScreen from "./pages/TripandExpScreen";
 import Performance from "./pages/Performance";
 import Analytics from "./pages/Analytics";
+import VehicleRegistry from "./pages/VehicleRegistry";
 
 function AppContent() {
   return (
@@ -21,7 +22,7 @@ function AppContent() {
       <Routes>
         <Route path="/" element={<LoginPage />} />
         <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/vehicle-registry" element={<h1>Vehicle Registry</h1>} />
+        <Route path="/vehicle-registry" element={<VehicleRegistry />} />
         <Route path="/trip-dispatcher" element={<TripDispatchPage />} />
         <Route path="/maintenance" element={<Maintenance />} />
         <Route path="/trip-expense" element={<TripandExpScreen />} />
