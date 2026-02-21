@@ -1,22 +1,28 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { authColors } from "../colors/colors";
+import { LogOut, LayoutDashboard, Truck, Navigation, Wrench, DollarSign, TrendingUp, PieChart } from "lucide-react";
 
 export default function Sidebar({ isOpen }) {
   const c = authColors;
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    navigate("/");
+  };
 
   const menuItems = [
-  { label: "Dashboard", path: "/dashboard" },
-  { label: "Vehicle Registry", path: "/vehicle-registry" },
-  { label: "Trip Dispatcher", path: "/trip-dispatcher" },
-  { label: "Maintenance", path: "/maintenance" },
-  { label: "Trip & Expense", path: "/trip-expense" },
-  { label: "Performance", path: "/performance" },
-  { label: "Analytics", path: "/analytics" },
+  { label: "Dashboard", path: "/dashboard", icon: LayoutDashboard },
+  { label: "Vehicle Registry", path: "/vehicle-registry", icon: Truck },
+  { label: "Trip Dispatcher", path: "/trip-dispatcher", icon: Navigation },
+  { label: "Maintenance", path: "/maintenance", icon: Wrench },
+  { label: "Trip & Expense", path: "/trip-expense", icon: DollarSign },
+  { label: "Performance", path: "/performance", icon: TrendingUp },
+  { label: "Analytics", path: "/analytics", icon: PieChart },
 ];
 
   return (
     <div
-      className={`absolute left-0 top-full w-64 shadow-lg transition-transform duration-300 z-40 h-screen
+      className={`absolute left-0 top-full w-64 shadow-lg transition-transform duration-300 z-40 h-167 flex flex-col
         ${isOpen ? "translate-x-0" : "-translate-x-full"}
       `}
       style={{ backgroundColor: "white" }}
@@ -27,19 +33,31 @@ export default function Sidebar({ isOpen }) {
             key={item.path}
             label={item.label}
             path={item.path}
+            icon={item.icon}
           />
         ))}
+      </div>
+
+      <div className="mt-auto p-6 border-t border-gray-200">
+        <button
+          onClick={handleLogout}
+          className="flex items-center gap-3 text-gray-700 hover:text-red-600 transition w-full py-2"
+        >
+          <LogOut size={20} />
+          <span className="font-medium">Logout</span>
+        </button>
       </div>
     </div>
   );
 }
 
-function SidebarItem({ label, path }) {
+function SidebarItem({ label, path, icon: Icon }) {
   return (
     <NavLink
       to={path}
       className="flex items-center gap-3 text-gray-700 cursor-pointer hover:text-black hover:translate-x-1 transition"
     >
+      {Icon && <Icon size={20} strokeWidth={1.5} />}
       {label}
     </NavLink>
   );
