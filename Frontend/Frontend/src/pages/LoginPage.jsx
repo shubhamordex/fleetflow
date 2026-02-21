@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { authColors } from "../colors/colors";
+import { useNavigate } from "react-router-dom";
 
 const EyeIcon = ({ open }) => (
   <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -23,6 +24,7 @@ const SpinnerIcon = () => (
 
 export default function LoginPage() {
   const c = authColors;
+  const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -43,7 +45,10 @@ export default function LoginPage() {
     }
     setError("");
     setLoading(true);
-    setTimeout(() => setLoading(false), 2000);
+    setTimeout(() => {
+      setLoading(false);
+      navigate("/dashboard");
+    }, 2000);
   };
 
   return (
