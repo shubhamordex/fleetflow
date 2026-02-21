@@ -1,0 +1,177 @@
+FLEETFLOW API DOCUMENTATION
+--------------------------
+
+1. AUTHENTICATION
+-----------------
+POST /api/auth/register
+{
+  "fullName": "Fleet Manager",
+  "email": "manager@fleetflow.com",
+  "password": "password123",
+  "role": "FLEET_MANAGER"
+}
+
+POST /api/auth/login
+{
+  "email": "manager@fleetflow.com",
+  "password": "password123"
+}
+
+2. VEHICLE MANAGEMENT
+---------------------
+GET /api/vehicles
+GET /api/vehicles/available
+GET /api/vehicles/{id}
+
+POST /api/vehicles
+{
+  "name": "Heavy Truck-01",
+  "licensePlate": "MH-01-AX-1234",
+  "model": "Tata Prima",
+  "vehicleType": "TRUCK",
+  "maxLoadCapacity": 12000.0,
+  "odometer": 5000.5,
+  "acquisitionCost": 4500000.0
+}
+
+PUT /api/vehicles/{id}
+{
+  "name": "Heavy Truck-01 Updated",
+  "licensePlate": "MH-01-AX-1234",
+  "model": "Tata Prima Gen2",
+  "vehicleType": "TRUCK",
+  "maxLoadCapacity": 13000.0,
+  "odometer": 5100.0,
+  "acquisitionCost": 4500000.0
+}
+
+DELETE /api/vehicles/{id}
+
+3. DRIVER MANAGEMENT
+--------------------
+GET /api/drivers
+GET /api/drivers/available
+GET /api/drivers/expired-licenses
+GET /api/drivers/{id}
+
+POST /api/drivers
+{
+  "fullName": "Alex Johnson",
+  "email": "alex.j@fleetflow.com",
+  "phone": "+1-555-0123",
+  "licenseNumber": "LN987654321",
+  "licenseCategory": "HEAVY_VEHICLE",
+  "licenseExpiry": "2027-12-31"
+}
+
+PUT /api/drivers/{id}
+{
+  "fullName": "Alex Johnson Updated",
+  "email": "alex.j.new@fleetflow.com",
+  "phone": "+1-555-9999",
+  "licenseNumber": "LN987654321",
+  "licenseCategory": "HEAVY_VEHICLE",
+  "licenseExpiry": "2028-12-31"
+}
+
+DELETE /api/drivers/{id}
+
+4. TRIP MANAGEMENT ("The Brain of the Operation")
+--------------------------------------------
+* HOW IT WORKS: Set up deliveries and move goods between locations.
+* BOOKING RULES: 
+  - Only 'FREE' (Available) vehicles and 'READY' (On Duty) drivers can be picked.
+  - SAFETY CHECK: If cargo weight exceeds vehicle capacity, the system blocks the trip with a "Too heavy!" warning.
+
+TRIP PROGRESS STAGES:
+1. DRAFT - Trip is planned/set up.
+2. DISPATCHED - Cargo is on the move.
+3. COMPLETED - Goods delivered, vehicle returned.
+4. CANCELLED - Trip was aborted.
+
+GET /api/trips
+GET /api/trips/{id}
+GET /api/trips/status/{status}
+
+POST /api/trips
+{
+  "origin": "Mumbai Warehouse",
+  "destination": "Pune Distribution Center",
+  "cargoDescription": "Electronic Components",
+  "cargoWeight": 500.0,
+  "vehicleId": "VEHICLE_UUID_HERE",
+  "driverId": "DRIVER_UUID_HERE",
+  "scheduledAt": "2026-02-25T10:00:00"
+}
+
+PATCH /api/trips/{id}/dispatch
+PATCH /api/trips/{id}/complete?endOdometer=15500.0
+PATCH /api/trips/{id}/cancel
+
+DELETE /api/trips/{id}
+
+5. FUEL LOGS
+------------
+GET /api/fuel
+GET /api/fuel/vehicle/{vehicleId}
+GET /api/fuel/total-cost
+GET /api/fuel/vehicle/{vehicleId}/total-cost
+GET /api/fuel/vehicle/{vehicleId}/total-liters
+
+POST /api/fuel
+{
+  "vehicleId": "VEHICLE_UUID_HERE",
+  "fuelDate": "2026-02-21",
+  "liters": 65.0,
+  "cost": 6500.0,
+  "odometerReading": 15200.0,
+  "station": "BPCL Station 4",
+  "fuelType": "DIESEL"
+}
+
+DELETE /api/fuel/{id}
+
+6. MAINTENANCE LOGS (Auto-Hide Rule Active)
+---------------------------------------
+* AUTO-HIDE RULE: When you add a vehicle to a maintenance log (status: SCHEDULED or IN_PROGRESS), 
+  the vehicle is automatically marked as "IN_SHOP" and hidden from the Dispatcher's available list.
+
+GET /api/maintenance
+GET /api/maintenance/vehicle/{vehicleId}
+GET /api/maintenance/total-cost
+GET /api/maintenance/vehicle/{vehicleId}/total-cost
+
+POST /api/maintenance
+{
+  "vehicleId": "VEHICLE_UUID_HERE",
+  "description": "Annual Engine Overhaul",
+  "serviceType": "REPAIR",
+  "serviceDate": "2026-02-21",
+  "cost": 12500.0,
+  "odometerReading": 15000.0,
+  "status": "IN_PROGRESS" // Options: SCHEDULED, IN_PROGRESS, COMPLETED
+}
+
+PATCH /api/maintenance/{id}/status?status=COMPLETED
+* This will mark the maintenance as done and set the vehicle back to "AVAILABLE".
+
+DELETE /api/maintenance/{id}
+
+7. ANALYTICS & DASHBOARD ("The Big Picture")
+--------------------------------------------
+* FUEL EFFICIENCY: Automatically calculates km per liter for every vehicle.
+* VEHICLE VALUE (ROI): Compares trip revenue against operational costs (fuel + repairs).
+* DEAD STOCK ALERTS: Highlights vehicles that are NOT making money or sitting idle.
+* ONE-CLICK REPORTS: Download full fleet performance reports instantly.
+
+GET /api/analytics/dashboard
+* Summary KPIs (Active Fleet, Maintenance, Utilization, Pending).
+
+GET /api/analytics/vehicles
+* Detailed table: ROI %, Efficiency (km/L), Total Cost.
+
+GET /api/analytics/dead-stock
+* List of vehicles identified as "Idle" or non-profitable.
+
+GET /api/analytics/report
+* Downloads the "One-Click" fleet performance report (CSV/Excel format).
