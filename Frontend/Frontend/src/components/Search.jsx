@@ -6,7 +6,7 @@ const Search = ({
   onButtonClick,
 }) => {
   return (
-    <div className="flex flex-col sm:flex-row items-center gap-4 px-8 py-6 border-b border-slate-100">
+    <div className="flex flex-col sm:flex-row items-center gap-4 px-8 py-6 border-slate-100">
       
       {/* Search Input */}
       <div className="relative flex-1">
