@@ -22,7 +22,7 @@ export default function Sidebar({ isOpen }) {
 
   return (
     <div
-      className={`absolute left-0 top-full w-64 shadow-lg transition-transform duration-300 z-40 h-167 flex flex-col
+      className={`absolute left-0 top-full w-64 shadow-lg transition-transform duration-300 z-40 flex flex-col
         ${isOpen ? "translate-x-0" : "-translate-x-full"}
       `}
       style={{ backgroundColor: "white" }}
@@ -36,16 +36,6 @@ export default function Sidebar({ isOpen }) {
             icon={item.icon}
           />
         ))}
-      </div>
-
-      <div className="mt-auto p-6 border-t border-gray-200">
-        <button
-          onClick={handleLogout}
-          className="flex items-center gap-3 text-gray-700 hover:text-red-600 transition w-full py-2"
-        >
-          <LogOut size={20} />
-          <span className="font-medium">Logout</span>
-        </button>
       </div>
     </div>
   );
