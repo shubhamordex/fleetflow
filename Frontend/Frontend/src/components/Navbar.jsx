@@ -11,7 +11,7 @@ export default function Navbar() {
     <div className="relative w-full">
       
       {/* Navbar */}
-      <nav className="w-full shadow-md px-4 py-3 flex items-center justify-between relative z-50" style={{backgroundColor:c.ambientGreen}}>
+      <nav className="w-full shadow-md px-4 py-3 flex items-center justify-between relative z-50" style={{backgroundColor:c.ambientGree}}>
         
         {/* Left */}
         <div className="flex items-center gap-3">

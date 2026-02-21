@@ -6,8 +6,7 @@ export default function Analytics() {
 
   return (
     <div
-      className="min-h-screen transition-colors duration-300"
-      style={{ backgroundColor: c.pageBg }}
+      className="min-h-screen transition-colors duration-300 bg-gradient-to-br from-slate-100 via-teal-50 to-slate-200"
     >
       <Navbar />
 
