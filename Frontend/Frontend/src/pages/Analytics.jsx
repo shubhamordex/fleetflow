@@ -1,6 +1,18 @@
 import Navbar from "../components/Navbar";
 import { authColors } from "../colors/colors";
 
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+  BarChart,
+  Bar,
+} from "recharts";
+
 export default function Analytics() {
   const c = authColors;
 
@@ -64,14 +76,33 @@ export default function Analytics() {
               Fuel Efficiency Trend (km/L)
             </h3>
 
-            <div
-              className="h-60 rounded-xl flex items-center justify-center text-sm"
-              style={{
-                backgroundColor: c.chartBg || "#f8f9fa",
-                color: c.secondaryText,
-              }}
-            >
-              Line Chart Here
+            <div className="h-72">
+              <ResponsiveContainer width="100%" height="100%">
+                <LineChart
+                  data={[
+                    { month: "Jan", efficiency: 14 },
+                    { month: "Feb", efficiency: 15 },
+                    { month: "Mar", efficiency: 13 },
+                    { month: "Apr", efficiency: 16 },
+                    { month: "May", efficiency: 17 },
+                    { month: "Jun", efficiency: 18 },
+                  ]}
+                >
+                  <CartesianGrid strokeDasharray="3 3" opacity={0.2} />
+                  <XAxis dataKey="month" />
+                  <YAxis />
+                  <Tooltip />
+                  <Line
+                    type="monotone"
+                    dataKey="efficiency"
+                    stroke="#0f766e"
+                    strokeWidth={3}
+                    dot={{ r: 5 }}
+                    isAnimationActive={true}
+                    animationDuration={1000}
+                  />
+                </LineChart>
+              </ResponsiveContainer>
             </div>
           </div>
 
@@ -90,13 +121,45 @@ export default function Analytics() {
             </h3>
 
             <div
-              className="h-60 rounded-xl flex items-center justify-center text-sm"
+              className="h-72 rounded-xl p-4"
               style={{
                 backgroundColor: c.chartBg || "#f8f9fa",
-                color: c.secondaryText,
               }}
             >
-              Bar Chart Here
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart
+                  data={[
+                    { name: "MH04AB1234", cost: 250000 },
+                    { name: "MH02CD5678", cost: 210000 },
+                    { name: "MH01EF3456", cost: 180000 },
+                    { name: "MH03GH7890", cost: 160000 },
+                    { name: "MH05IJ1122", cost: 140000 },
+                  ]}
+                  margin={{ top: 10, right: 20, left: 0, bottom: 5 }}
+                >
+                  <CartesianGrid strokeDasharray="3 3" opacity={0.2} />
+                  <XAxis
+                    dataKey="name"
+                    tick={{ fill: c.secondaryText }}
+                  />
+                  <YAxis tick={{ fill: c.secondaryText }} />
+                  <Tooltip
+                    contentStyle={{
+                      backgroundColor: "#fff",
+                      borderRadius: "12px",
+                      border: "none",
+                    }}
+                  />
+                  <Bar
+                    dataKey="cost"
+                    fill="#14b8a6"  
+                    radius={[10, 10, 0, 0]}
+                    isAnimationActive={true}
+                    animationDuration={1200}
+                    animationEasing="ease-out"
+                  />
+                </BarChart>
+              </ResponsiveContainer>
             </div>
           </div>
         </div>
