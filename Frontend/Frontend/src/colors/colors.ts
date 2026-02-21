@@ -52,4 +52,36 @@ export const authColors = {
 	successBadgeBg: "#dcfce7",
 	successBadgeBorder: "#86efac",
 	successBadgeIcon: "#16a34a",
+
+	// Registry & Table Colors
+	registryBg: "white",
+	registryBorder: "#e2e8f0",
+	registryHeaderBg: "#f8fafc",
+	registryRowBg: "#ffffff",
+	registryRowAltBg: "rgba(15, 23, 42, 0.02)",
+	registryRowHover: "rgba(20, 184, 166, 0.04)",
+
+	slateText800: "#1e293b",
+	slateText600: "#475569",
+	slateText400: "#cbd5e1",
+
+	teal400: "#14b8a6",
+	teal500: "#14b8a6",
+	teal600: "#0d9488",
+
+	statusIdleBg: "#fef3c7",
+	statusIdleText: "#b45309",
+	statusIdleBorder: "#fcd34d",
+
+	statusActiveBg: "#d1fae5",
+	statusActiveText: "#065f46",
+	statusActiveBorder: "#a7f3d0",
+
+	statusMaintenanceBg: "#fee2e2",
+	statusMaintenanceText: "#991b1b",
+	statusMaintenanceBorder: "#fecaca",
+
+	modalOverlay: "rgba(0, 0, 0, 0.3)",
+	deleteText: "#f87171",
+	deleteTextHover: "#dc2626",
 };
