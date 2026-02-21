@@ -59,7 +59,7 @@ return (
             onChange={e => setSearch(e.target.value)}
             placeholder="Search by plate, type, model, status..."
             buttonLabel="New Vehicle"
-            setShowModal={setShowModal}
+            onButtonClick={() => setShowModal(true)}
           />
         </div>
 
