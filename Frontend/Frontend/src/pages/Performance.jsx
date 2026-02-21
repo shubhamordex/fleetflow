@@ -43,11 +43,12 @@ export default function Performance() {
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-100 via-teal-50 to-slate-200">
+    <div
+      className="min-h-screen w-screen transition-colors duration-300 bg-gradient-to-br from-slate-100 via-teal-50 to-slate-200 overflow-x-hidden flex flex-col"
+    >
       <Navbar />
 
-      <div className="w-full flex-1 px-6 py-8">
-        <div className="max-w-7xl mx-auto space-y-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-10 w-full">
 
           {/* PAGE HEADER */}
           <div>
@@ -158,7 +159,6 @@ export default function Performance() {
             </table>
           </div>
 
-        </div>
       </div>
     </div>
   );
