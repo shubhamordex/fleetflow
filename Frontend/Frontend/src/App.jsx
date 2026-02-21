@@ -14,6 +14,7 @@ import TripandExpScreen from "./pages/TripandExpScreen";
 import Performance from "./pages/Performance";
 import Analytics from "./pages/Analytics";
 import VehicleRegistry from "./pages/VehicleRegistry";
+import SignUp from "./pages/SignUp";
 
 function AppContent() {
   return (
@@ -21,6 +22,7 @@ function AppContent() {
       {/* <div className="flex min-h-screen"> */}
       <Routes>
         <Route path="/" element={<LoginPage />} />
+        <Route path="/signup" element={<SignUp />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/vehicle-registry" element={<VehicleRegistry />} />
         <Route path="/trip-dispatcher" element={<TripDispatchPage />} />

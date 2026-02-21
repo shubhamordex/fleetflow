@@ -262,15 +262,6 @@ export default function LoginPage() {
               </div>
               <span className="text-xs" style={{ color: c.neutral500 }}>Remember me</span>
             </label>
-            <button
-              type="button"
-              className="text-xs transition-colors duration-200"
-              style={{ color: c.roleAccent, background: "none", border: "none", cursor: "pointer" }}
-              onMouseEnter={(e) => (e.currentTarget.style.color = c.roleAccentHover)}
-              onMouseLeave={(e) => (e.currentTarget.style.color = c.roleAccent)}
-            >
-              Forgot password?
-            </button>
           </div>
 
           {/* Login button */}
@@ -328,6 +319,7 @@ export default function LoginPage() {
         <p className="text-center text-xs mt-6" style={{ color: c.gray }}>
           Don&apos;t have an account?{" "}
           <button
+            onClick={() => navigate("/signup")}
             className="transition-colors duration-200"
             style={{ color: c.roleAccent, background: "none", border: "none", cursor: "pointer", fontSize: "inherit" }}
             onMouseEnter={(e) => (e.currentTarget.style.color = c.roleAccentHover)}

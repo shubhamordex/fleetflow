@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { authColors } from "../colors/colors";
+import { useNavigate } from "react-router-dom";
 
 const EyeIcon = ({ open }) => (
   <svg
@@ -37,6 +38,8 @@ const EyeIcon = ({ open }) => (
 
 export default function SignUp() {
   const c = authColors;
+  const navigate = useNavigate();
+  const roles = ["Fleet Managers", "Dispatchers", "Safety Officers", "Financial Analysts"];
   const [form, setForm] = useState({
     fullname: "",
     email: "",
@@ -81,6 +84,9 @@ export default function SignUp() {
     e.preventDefault();
     if (validate()) {
       setSuccess(true);
+      setTimeout(() => {
+        navigate("/dashboard");
+      }, 2000);
     }
   };
 
@@ -197,44 +203,26 @@ export default function SignUp() {
           {/* Role */}
           <div>
             <label className="text-xs font-medium" style={{ color: c.neutral400 }}>Role</label>
-            <div className="relative">
-              <select
-                name="role"
-                value={form.role}
-                onChange={handleChange}
-                className={`w-full -ml-1 mt-1 p-2.5 pr-10 rounded-lg border text-sm text-white focus:outline-none focus:ring-2 appearance-none ${
-                  errors.role ? "border-red-500" : "border-white/10"
-                }`}
-                style={{ background: c.inputBg, "--tw-ring-color": c.roleAccent }}
-              >
-                <option value="" style={{ color: c.darkText, backgroundColor: c.white }}>
-                  Select your role
-                </option>
-                <option value="admin" style={{ color: c.darkText, backgroundColor: c.white }}>
-                  Admin
-                </option>
-                <option value="manager" style={{ color: c.darkText, backgroundColor: c.white }}>
-                  Manager
-                </option>
-                <option value="developer" style={{ color: c.darkText, backgroundColor: c.white }}>
-                  Developer
-                </option>
-                <option value="designer" style={{ color: c.darkText, backgroundColor: c.white }}>
-                  Designer
-                </option>
-                <option value="viewer" style={{ color: c.darkText, backgroundColor: c.white }}>
-                  Viewer
-                </option>
-              </select>
-              <svg
-                className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 h-4 w-4"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke={c.neutral400}
-                strokeWidth={2}
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-              </svg>
+            <div className="flex gap-2 flex-wrap mt-2">
+              {roles.map((r) => (
+                <button
+                  key={r}
+                  type="button"
+                  onClick={() => {
+                    setForm({ ...form, role: r });
+                    setErrors({ ...errors, role: "" });
+                  }}
+                  className="px-3 py-1.5 rounded-lg text-xs font-medium transition-all duration-200 cursor-pointer"
+                  style={{
+                    background: form.role === r ? c.roleActiveBg : c.inputBg,
+                    border: form.role === r ? `1px solid ${c.roleActiveBorder}` : `1px solid ${c.cardBorder}`,
+                    color: form.role === r ? c.roleAccent : c.neutral500,
+                    boxShadow: form.role === r ? `0 0 14px ${c.roleActiveShadow}` : "none",
+                  }}
+                >
+                  {r}
+                </button>
+              ))}
             </div>
             {errors.role && (
               <p className="text-red-500 text-xs mt-1">{errors.role}</p>
