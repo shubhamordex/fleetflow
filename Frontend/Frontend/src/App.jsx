@@ -8,10 +8,10 @@ function App() {
   const [count, setCount] = useState(0)
 
   return (
-    <div className="h-screen flex items-center justify-center bg-white">
-      <h1 className="text-4xl font-bold text-blue-800">
+    <div>
+      {/* <h1 className="text-4xl font-bold text-blue-800">
         Tailwind is Working 🚀
-      </h1>
+      </h1> */}
       <LoginPage />
     </div>
   )
